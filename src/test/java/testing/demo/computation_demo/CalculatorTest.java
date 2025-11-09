@@ -85,37 +85,6 @@ public class CalculatorTest {
 		System.out.println("[After Each] Finished Test: " + input1 + " * " + input2 + " = " + expected);
 	}
 	
-	//Multiply using @CsvFileSource
-	@ParameterizedTest
-	@CsvFileSource(resources = "/data/testMultiply.csv")
-	public void testMultiply2(int input1, int input2, int expected) {
-		System.out.println();
-		System.out.println("[Before Each] Starting Test: " + input1 + " * " + input2);
-		assertEquals(expected, calculator.multiple(input1, input2));
-		System.out.println("[After Each] Finished Test: " + input1 + " * " + input2 + " = " + expected);
-	}
-	
-	//Multiply using @CsvFileSource
-		@ParameterizedTest
-		@CsvFileSource(resources = "/data/testMultiply.csv")
-		public void testMultiply3(int input1, int input2, int expected) {
-			System.out.println();
-			System.out.println("[Before Each] Starting Test: " + input1 + " * " + input2);
-			assertEquals(expected, calculator.multiple(input1, input2));
-			System.out.println("[After Each] Finished Test: " + input1 + " * " + input2 + " = " + expected);
-		}
-		
-		//Multiply using @CsvFileSource
-				@ParameterizedTest
-				@CsvFileSource(resources = "/data/testMultiply.csv")
-				public void testMultiply4(int input1, int input2, int expected) {
-					System.out.println();
-					System.out.println("[Before Each] Starting Test: " + input1 + " * " + input2);
-					assertEquals(expected, calculator.multiple(input1, input2));
-					System.out.println("[After Each] Finished Test: " + input1 + " * " + input2 + " = " + expected);
-				}
-	
-	
 	// Divide Test
 	@Test
 	public void testDivideByZero() {
@@ -123,6 +92,17 @@ public class CalculatorTest {
 		System.out.println("[Before Each] Starting divide by zero test");
 		assertThrows(IllegalArgumentException.class, ()-> calculator.divide(10, 0));
 		System.out.println("[After Each] Divide by zero threw ArithmeticException as expected");
+	}
+	
+	@ParameterizedTest
+	@CsvSource({
+	    "10, 2, 5",
+	    "100, 4, 25",
+	    "-50, -5, 10",
+	    "9, 3, 3"
+	})
+	public void testDividePositiveCases(int input1, int input2, int expected) {
+	    assertEquals(expected, calculator.divide(input1, input2));
 	}
 	
 	
